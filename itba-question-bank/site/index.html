@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Luyện Thi IT Business Analyst — Ngân Hàng 200 Câu Hỏi (10 Đề)</title>
+  <meta name="description" content="Nền tảng luyện thi và đánh giá năng lực IT Business Analyst dành cho BA Intern, BA Fresher và IT BA Junior. 200 câu hỏi chuẩn BABOK v3, Scrum, BPMN, UML, SQL, API và Testing.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Site Header -->
+  <header class="site-header">
+    <div class="header-container">
+      <a href="#" class="brand" id="brand-link" title="Về trang chủ">
+        <div class="brand-icon">📋</div>
+        <div>
+          <div class="brand-title">IT BA Practice Hub</div>
+          <div class="brand-subtitle">Ngân hàng 200 câu hỏi • 10 Đề thi chuẩn hóa</div>
+        </div>
+      </a>
+      <div class="header-actions">
+        <button class="btn btn-outline btn-sm" id="btn-home" style="display: none;">🏠 Trang chủ</button>
+        <button class="btn btn-outline btn-sm" id="btn-reset-all" title="Xóa toàn bộ kết quả thi đã lưu">🔄 Đặt lại tiến độ</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Application Container -->
+  <main class="main-content" id="app">
+
+    <!-- ===================================================================
+         VIEW 1: HOME (EXAM SELECTION)
+         =================================================================== -->
+    <section id="view-home" class="view">
+      <div class="hero-section">
+        <h1 class="hero-title">Luyện Thi IT Business Analyst</h1>
+        <p class="hero-subtitle">
+          Củng cố kiến thức nền tảng, phân biệt khái niệm dễ nhầm lẫn, phân tích bài toán nghiệp vụ thực tế và sẵn sàng cho các kỳ phỏng vấn BA Intern, BA Fresher & Junior.
+        </p>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon">📚</div>
+            <div class="stat-info">
+              <span class="stat-value" id="stat-total-exams">10</span>
+              <span class="stat-label">Đề thi độc lập</span>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">🎯</div>
+            <div class="stat-info">
+              <span class="stat-value" id="stat-total-questions">200</span>
+              <span class="stat-label">Câu hỏi trắc nghiệm</span>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">✅</div>
+            <div class="stat-info">
+              <span class="stat-value" id="stat-completed-exams">0/10</span>
+              <span class="stat-label">Đề đã hoàn thành</span>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">⭐</div>
+            <div class="stat-info">
+              <span class="stat-value" id="stat-avg-score">--</span>
+              <span class="stat-label">Điểm trung bình</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-header">
+        <h2 class="section-title">Danh Sách 10 Đề Thi Chuyên Đề</h2>
+        <div class="search-box">
+          <span>🔍</span>
+          <input type="text" id="exam-search" placeholder="Tìm kiếm theo chủ đề hoặc đề thi..." autocomplete="off">
+        </div>
+      </div>
+
+      <div class="exam-grid" id="exam-grid">
+        <!-- Rendered dynamically via app.js -->
+        <div style="grid-column: 1/-1; text-align: center; padding: 3rem;">
+          <p>Đang tải dữ liệu ngân hàng câu hỏi...</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         VIEW 2: EXAM TAKING
+         =================================================================== -->
+    <section id="view-exam" class="view" style="display: none;">
+      <!-- Sticky Exam Header -->
+      <div class="exam-taking-header">
+        <div class="exam-title-group">
+          <button class="btn btn-outline btn-sm" id="btn-exit-exam" title="Rời khỏi bài thi">← Rời bài thi</button>
+          <div class="exam-current-name" id="exam-taking-title">Đề thi</div>
+        </div>
+        <div class="timer-badge" id="timer-badge" title="Thời gian còn lại">
+          <span>⏱️</span>
+          <span id="timer-display">20:00</span>
+        </div>
+        <button class="btn btn-primary btn-sm" id="btn-submit-exam">Nộp bài ➔</button>
+      </div>
+
+      <div class="exam-layout">
+        <!-- Question Container -->
+        <div class="question-container">
+          <div class="question-meta-bar">
+            <div class="question-tags">
+              <span class="question-number-badge" id="q-number-badge">Câu 1/20</span>
+              <span class="badge badge-topic" id="q-subtopic-badge">Subtopic</span>
+              <span class="badge" id="q-difficulty-badge">Dễ</span>
+            </div>
+            <button class="flag-btn" id="btn-flag-question" title="Đánh dấu câu này để xem lại sau">
+              <span>🚩</span>
+              <span id="flag-btn-text">Đánh dấu</span>
+            </button>
+          </div>
+
+          <!-- Scenario Box (Conditional) -->
+          <div class="scenario-box" id="q-scenario-box" style="display: none;">
+            <div class="scenario-title">📋 Tình huống nghiệp vụ:</div>
+            <div id="q-scenario-text">Nội dung tình huống...</div>
+          </div>
+
+          <!-- Question Text -->
+          <div class="question-text" id="q-text">
+            Nội dung câu hỏi đang được tải...
+          </div>
+
+          <!-- Options List -->
+          <div class="options-list" id="q-options-list">
+            <!-- 4 Options rendered dynamically -->
+          </div>
+
+          <!-- Navigation Footer -->
+          <div class="question-nav-bar">
+            <button class="btn btn-secondary" id="btn-prev-q">← Câu trước</button>
+            <span style="font-size: 0.85rem; color: var(--text-secondary);" id="q-step-indicator">1 / 20</span>
+            <button class="btn btn-primary" id="btn-next-q">Câu tiếp theo →</button>
+          </div>
+        </div>
+
+        <!-- Sidebar Navigation Drawer -->
+        <aside class="exam-sidebar">
+          <div class="sidebar-title">
+            <span>Bảng câu hỏi</span>
+            <span id="sidebar-answered-count">0/20</span>
+          </div>
+          <div class="progress-summary" id="sidebar-progress-text">Đã trả lời: 0%</div>
+          <div class="progress-bar-wrap">
+            <div class="progress-bar-fill" id="sidebar-progress-fill" style="width: 0%;"></div>
+          </div>
+
+          <div class="question-nav-grid" id="question-nav-grid">
+            <!-- 20 grid buttons rendered dynamically -->
+          </div>
+
+          <div class="legend-grid">
+            <div class="legend-item"><div class="legend-dot dot-answered"></div> Đã trả lời</div>
+            <div class="legend-item"><div class="legend-dot"></div> Chưa trả lời</div>
+            <div class="legend-item"><div class="legend-dot dot-current"></div> Đang làm</div>
+            <div class="legend-item"><div class="legend-dot dot-flagged"></div> Đánh dấu</div>
+          </div>
+
+          <div style="margin-top: 1.5rem;">
+            <button class="btn btn-primary" id="btn-sidebar-submit" style="width: 100%;">Nộp bài thi</button>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         VIEW 3: RESULTS & DETAILED REVIEW
+         =================================================================== -->
+    <section id="view-results" class="view" style="display: none;">
+      <!-- Hero Score Summary -->
+      <div class="results-hero">
+        <div class="results-badge-wrap">
+          <div class="score-big" id="res-score">18</div>
+          <div class="score-max">/ 20 điểm</div>
+        </div>
+        <h2 class="results-verdict" id="res-verdict">Xuất Sắc!</h2>
+        <p class="results-subtext" id="res-subtext">
+          Bạn đã thể hiện sự am hiểu vững chắc về các khái niệm và kỹ năng phân tích nghiệp vụ.
+        </p>
+
+        <div class="results-metrics-bar">
+          <div class="metric-item">
+            <span class="metric-val" id="res-accuracy" style="color: #215A1A;">90%</span>
+            <span class="metric-lbl">Tỷ lệ chính xác</span>
+          </div>
+          <div class="metric-item">
+            <span class="metric-val" id="res-correct" style="color: #215A1A;">18</span>
+            <span class="metric-lbl">Số câu đúng</span>
+          </div>
+          <div class="metric-item">
+            <span class="metric-val" id="res-incorrect" style="color: #8A231E;">2</span>
+            <span class="metric-lbl">Số câu sai</span>
+          </div>
+          <div class="metric-item">
+            <span class="metric-val" id="res-time-spent">14:25</span>
+            <span class="metric-lbl">Thời gian làm bài</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Weak Topics Analysis Card -->
+      <div class="weak-topics-card" id="weak-topics-card">
+        <div class="weak-topics-header">
+          <span>⚠️</span>
+          <span>Phân Tích Lỗ Hổng Kiến Thức & Chủ Đề Cần Ôn Tập:</span>
+        </div>
+        <p style="font-size: 0.88rem; margin-bottom: 0.75rem;" id="weak-topics-desc">
+          Dựa trên các câu hỏi bạn trả lời chưa chính xác, hãy tập trung rà soát các chủ đề sau:
+        </p>
+        <div class="weak-topic-tags" id="weak-topic-tags">
+          <!-- Rendered dynamically -->
+        </div>
+      </div>
+
+      <!-- Action buttons -->
+      <div style="display: flex; gap: 1rem; justify-content: center; margin-bottom: 2.5rem; flex-wrap: wrap;">
+        <button class="btn btn-secondary btn-lg" id="btn-back-to-home">🏠 Về danh sách đề thi</button>
+        <button class="btn btn-primary btn-lg" id="btn-retake-exam">🔄 Làm lại đề này</button>
+      </div>
+
+      <!-- Review Header & Filter Bar -->
+      <div class="review-header-bar">
+        <h3 style="font-size: 1.25rem;">Xem Lại Chi Tiết Từng Câu Hỏi & Lời Giải</h3>
+        <div class="filter-pills">
+          <button class="filter-pill active" data-filter="all" id="pill-all">Tất cả (20)</button>
+          <button class="filter-pill" data-filter="incorrect" id="pill-incorrect">Câu làm sai (0)</button>
+          <button class="filter-pill" data-filter="correct" id="pill-correct">Câu làm đúng (0)</button>
+          <button class="filter-pill" data-filter="flagged" id="pill-flagged">Đã đánh dấu (0)</button>
+        </div>
+      </div>
+
+      <!-- Questions Review List -->
+      <div id="review-questions-container">
+        <!-- Rendered dynamically via app.js -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Submit Confirmation Modal -->
+  <div class="modal-overlay" id="modal-submit">
+    <div class="modal-card">
+      <h3 class="modal-title">Xác Nhận Nộp Bài Thi</h3>
+      <div class="modal-body" id="modal-submit-body">
+        Bạn đã trả lời 20/20 câu hỏi. Bạn có chắc chắn muốn nộp bài để xem kết quả không?
+      </div>
+      <div class="modal-actions">
+        <button class="btn btn-secondary" id="btn-modal-cancel">Tiếp tục làm bài</button>
+        <button class="btn btn-primary" id="btn-modal-confirm-submit">Xác nhận nộp bài</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Exit Confirmation Modal -->
+  <div class="modal-overlay" id="modal-exit">
+    <div class="modal-card">
+      <h3 class="modal-title">Rời Khỏi Bài Thi?</h3>
+      <div class="modal-body">
+        Bài thi của bạn đang diễn ra. Nếu rời khỏi bây giờ, tiến trình làm bài chưa hoàn tất của bạn có thể bị hủy bỏ. Bạn có chắc chắn muốn quay về trang chủ không?
+      </div>
+      <div class="modal-actions">
+        <button class="btn btn-secondary" id="btn-modal-cancel-exit">Ở lại làm tiếp</button>
+        <button class="btn btn-danger" id="btn-modal-confirm-exit">Rời bài thi</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Reset Progress Confirmation Modal -->
+  <div class="modal-overlay" id="modal-reset">
+    <div class="modal-card">
+      <h3 class="modal-title">Xóa Toàn Bộ Tiến Độ?</h3>
+      <div class="modal-body">
+        Hành động này sẽ xóa toàn bộ lịch sử điểm số, kết quả thi và ghi chú của tất cả 10 đề thi đã lưu trên trình duyệt của bạn. Bạn không thể hoàn tác hành động này.
+      </div>
+      <div class="modal-actions">
+        <button class="btn btn-secondary" id="btn-modal-cancel-reset">Hủy bỏ</button>
+        <button class="btn btn-danger" id="btn-modal-confirm-reset">Xác nhận xóa</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <p>IT Business Analyst Practice Hub • Ngân hàng 200 câu hỏi trắc nghiệm chuyên môn</p>
+    <p style="margin-top: 0.35rem; color: var(--text-muted); font-size: 0.78rem;">
+      Tài liệu đối soát học thuật: IIBA BABOK Guide v3, Scrum Guide 2020, BPMN 2.0 (OMG), UML 2.5, RFC 9110 HTTP Semantics, ISTQB CTFL & Postman Documentation.
+    </p>
+  </footer>
+
+  <!-- Main JavaScript Application -->
+  <script src="app.js"></script>
+</body>
+</html>
