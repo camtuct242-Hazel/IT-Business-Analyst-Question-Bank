@@ -1271,3 +1271,19 @@ a:hover {
     max-width: 200px;
   }
 }
+
+/* Author Credit */
+.brand-author {
+  margin-top: 3px;
+  font-size: 0.72rem;
+  font-weight: 400;
+  color: var(--text-muted);
+  letter-spacing: 0.01em;
+}
+
+@media (max-width: 640px) {
+  .brand-author {
+    font-size: 0.65rem;
+  }
+}
+
